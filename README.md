@@ -15,6 +15,7 @@ SageLogger offers 7 built-in log types for local logging:
 6. INFORMATION: For general information logging.
 7. MILD_EXCEPTION: To log minor exceptions or errors.
 8. DEBUG: To debug and troubleshoot code (disabled by default).
+9. AMONGUS: For funny ones. You need to enable it first.
 
 ### Custom Local Log Types
 Apart from the predefined log types, you can create custom log types using the `SageLogger.DynamicType.fromChar` method or the `SageLogger.DynamicType.fromColoredChar` method for colored logs.
