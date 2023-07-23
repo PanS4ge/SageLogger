@@ -11,3 +11,5 @@ def create_discord_webhook_remote(url, name : str = "", savetofile : bool = Fals
 
 def create_temporary():
     return create(name="temporary", savetofile=False)
+
+errorlogger = create("Errors", False, "log");

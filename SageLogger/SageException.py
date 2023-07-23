@@ -3,3 +3,6 @@ class NoLogPlaceholder(Exception):
 
 class NotDiscordWebhook(Exception):
     pass
+
+class UhOhSomeoneTooCurious(Exception):
+    pass

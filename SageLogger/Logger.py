@@ -31,12 +31,14 @@ class xxPartType:
     customization : str = ""
     value : tuple[int, str, bool] = (-2, "", False)
     enabled = False
-    def __init__(self, name, Id, customization, enabled) -> None:
+    lockedup = False
+    def __init__(self, name, Id, customization, enabled, lockedup : bool = False) -> None:
         self.name = name
         self.Id = Id
         self.customization = customization
         self.value = (self.Id, self.customization, self.enabled)
         self.enabled = enabled
+        self.lockedup = lockedup
 
 class xxType:
     DEFAULT : xxPartType = xxPartType("DEFAULT", -2, "", True)
@@ -47,6 +49,8 @@ class xxType:
     INFORMATION : xxPartType = xxPartType("INFORMATION", -2, "", True)
     MILD_EXCEPTION : xxPartType = xxPartType("MILD_EXCEPTION", -2, "", True)
     DEBUG : xxPartType = xxPartType("DEBUG", -2, "", False)
+    AMONGUS : xxPartType = xxPartType("AMONGUS", -2, "", True)
+    SAGE_LOGGER_DEBUG : xxPartType = xxPartType("SAGE_LOGGER_DEBUG", -2, "", False)
     def refresh(self, customization):
         self.DEFAULT = xxPartType("DEFAULT", 0, "", self.DEFAULT.enabled)
         self.POSITIVE = xxPartType("POSITIVE", 1, customization.setup_custom_border(colorama.Fore.GREEN + "+"), self.POSITIVE.enabled)
@@ -56,9 +60,11 @@ class xxType:
         self.INFORMATION = xxPartType("INFORMATION", 5, customization.setup_custom_border(colorama.Fore.CYAN + "i"), self.INFORMATION.enabled)
         self.MILD_EXCEPTION = xxPartType("MILD_EXCEPTION", 6, customization.setup_custom_border(colorama.Fore.LIGHTRED_EX + "X"), self.MILD_EXCEPTION.enabled)
         self.DEBUG = xxPartType("DEBUG", 7, customization.setup_custom_border(colorama.Fore.LIGHTMAGENTA_EX + "*"), self.DEBUG.enabled)
+        self.AMONGUS = xxPartType("AMONGUS", 8, customization.setup_custom_border(colorama.Fore.RED + "ඞ"), self.AMONGUS.enabled)
+        self.SAGE_LOGGER_DEBUG = xxPartType("SAGE_LOGGER_DEBUG", 9, customization.setup_custom_border(colorama.Fore.LIGHTGREEN_EX + "S" + colorama.Fore.GREEN + "L" + colorama.Fore.LIGHTMAGENTA_EX + "D"), False, lockedup=True)
         
     def __iter__(self):
-        return [self.DEFAULT, self.POSITIVE, self.ONHOLD, self.NEGATIVE, self.FROZEN, self.INFORMATION, self.MILD_EXCEPTION, self.DEBUG]
+        return [self.DEFAULT, self.POSITIVE, self.ONHOLD, self.NEGATIVE, self.FROZEN, self.INFORMATION, self.MILD_EXCEPTION, self.DEBUG, self.AMONGUS, self.SAGE_LOGGER_DEBUG]
 
 class MildError:
     @staticmethod
@@ -85,7 +91,7 @@ class xxCustomization:
     
 class SageLogger:
     customization : xxCustomization = None # type: ignore
-    DynamicType = DynamicType
+    DynamicType = DynamicType()
     
     name = ""
     logfile = ""
@@ -104,15 +110,25 @@ class SageLogger:
             with open(self.name + "." + self.logfile, "a") as wr:
                 wr.write(("-" * 16) + " " + datetime.datetime.now().strftime("%d/%m/%Y, %H:%M:%S") + " " + ("-" * 16) + "\n")
                 wr.close()
-                
+    
+    def is_enabled_type(self, type):
+        return type.enabled
+    
     def toggle_type(self, type):
+        if (type.lockedup):
+            yield SageException.UhOhSomeoneTooCurious()
         type.enabled = not type.enabled
         
     def enable_type(self, type):
+        if (type.lockedup):
+            yield SageException.UhOhSomeoneTooCurious()
         type.enabled = True
         
     def disable_type(self, type):
         type.enabled = False
+        
+    def unlock_type_not_recommended_please_leave_it_alone_it_will_spam(self, type):
+        type.lockedup = False
     
     def log(self, message : str, type : Union[tuple[int, str, bool], xxPartType] = Type.DEFAULT.value, color = colorama.Fore.RESET, id : int = -2137, date : bool = False, time : bool = False, datecolor : str = colorama.Fore.RESET, timecolor : str = colorama.Fore.RESET, showname : bool = True, ending : str = "\n"):
         typefinish = None
@@ -193,6 +209,7 @@ class SageRemoteLogger(SageLogger):
     logfile = ""
     savetofile = ""
     def __init__(self, method, url, headers, body, name: str = "", savetofile: bool = False, logfile: str = "log"):
+        SageFactory.errorlogger.log("Initializing remote logger...", type=SageLogger.Type.SAGE_LOGGER_DEBUG)
         global thislogger
         if thislogger is None:
             thislogger = self
@@ -203,6 +220,7 @@ class SageRemoteLogger(SageLogger):
         self.method = method
         self.headers = headers
         self.body = body
+        SageFactory.errorlogger.log("Searching for placeholder %LOG%", type=SageLogger.Type.SAGE_LOGGER_DEBUG)
         self.remote = SageRemoteLogger.search_for_placeholder(headers, body)
         if self.remote == RemoteWhereLog.NOWHERE:
             raise SageException.NoLogPlaceholder("Remember to somewhere put %LOG%, maybe in the body?")
@@ -215,7 +233,9 @@ class SageRemoteLogger(SageLogger):
     def log(self, message : str, print_on_console : bool = False, ending : str = "\n"):
         if print_on_console:
             print(message, end=ending)
+        
         a = requests.request(self.method, self.url, json=SageRemoteLogger.replace_placeholder(message, RemoteWhereLog.BODY, self.remote, self.headers, self.body), headers=SageRemoteLogger.replace_placeholder(message, RemoteWhereLog.HEADERS, self.remote, self.headers, self.body))
+        SageFactory.errorlogger.log(a.text + " - " + str(a.status_code), type=SageLogger.Type.SAGE_LOGGER_DEBUG)
         if self.savetofile:
             with open(self.name + "." + self.logfile, "a") as wr:
                 wr.write("(" + str(a.status_code) + ") " + message + ending)
@@ -238,4 +258,4 @@ class SageDiscordWebhookLogger:
                                     }, name, savetofile, logfile)
         else:
             MildError.throw(SageFactory.create_temporary(), "NotDiscordWebhook", "This url isn't a discord webhook, maybe try SageFactory.create_remote method")
-            return SageRemoteLogger("", "", {}, {})
+            return SageRemoteLogger("", "", {"log":"%LOG%"}, {})
