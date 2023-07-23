@@ -2,9 +2,9 @@ import colorama
 import datetime
 import requests
 from typing import Union
-from . import SageException, SageFactory
 from enum import Enum
 import os
+from . import SageException, SageFactory
 
 thislogger = None
 
@@ -50,7 +50,7 @@ class xxType:
     MILD_EXCEPTION : xxPartType = xxPartType("MILD_EXCEPTION", -2, "", True)
     DEBUG : xxPartType = xxPartType("DEBUG", -2, "", False)
     AMONGUS : xxPartType = xxPartType("AMONGUS", -2, "", True)
-    SAGE_LOGGER_DEBUG : xxPartType = xxPartType("SAGE_LOGGER_DEBUG", -2, "", False)
+    SAGE_LOGGER_DEBUG : xxPartType = xxPartType("SAGE_LOGGER_DEBUG", -2, "", True)
     def refresh(self, customization):
         self.DEFAULT = xxPartType("DEFAULT", 0, "", self.DEFAULT.enabled)
         self.POSITIVE = xxPartType("POSITIVE", 1, customization.setup_custom_border(colorama.Fore.GREEN + "+"), self.POSITIVE.enabled)
@@ -61,15 +61,39 @@ class xxType:
         self.MILD_EXCEPTION = xxPartType("MILD_EXCEPTION", 6, customization.setup_custom_border(colorama.Fore.LIGHTRED_EX + "X"), self.MILD_EXCEPTION.enabled)
         self.DEBUG = xxPartType("DEBUG", 7, customization.setup_custom_border(colorama.Fore.LIGHTMAGENTA_EX + "*"), self.DEBUG.enabled)
         self.AMONGUS = xxPartType("AMONGUS", 8, customization.setup_custom_border(colorama.Fore.RED + "ඞ"), self.AMONGUS.enabled)
-        self.SAGE_LOGGER_DEBUG = xxPartType("SAGE_LOGGER_DEBUG", 9, customization.setup_custom_border(colorama.Fore.LIGHTGREEN_EX + "S" + colorama.Fore.GREEN + "L" + colorama.Fore.LIGHTMAGENTA_EX + "D"), False, lockedup=True)
-        
-    def __iter__(self):
+        self.SAGE_LOGGER_DEBUG = xxPartType("SAGE_LOGGER_DEBUG", 9, customization.setup_custom_border(colorama.Fore.LIGHTGREEN_EX + "S" + colorama.Fore.GREEN + "L" + colorama.Fore.LIGHTMAGENTA_EX + "D"), self.SAGE_LOGGER_DEBUG.enabled and not self.SAGE_LOGGER_DEBUG.lockedup)
+    
+    def loggers_in_array(self):
         return [self.DEFAULT, self.POSITIVE, self.ONHOLD, self.NEGATIVE, self.FROZEN, self.INFORMATION, self.MILD_EXCEPTION, self.DEBUG, self.AMONGUS, self.SAGE_LOGGER_DEBUG]
-
+    
+    def __iter__(self):
+        return self.loggers_in_array()
+    
+    def is_enabled_type(self, type):
+        return self.loggers_in_array()[type.Id].enabled
+    
+    def toggle_type(self, type):
+        if (type.lockedup):
+            yield SageException.UhOhSomeoneTooCurious()
+        self.loggers_in_array()[type.Id].enabled = not self.loggers_in_array()[type.Id].enabled
+        
+    def enable_type(self, type):
+        if (self.loggers_in_array()[type.Id].lockedup):
+            yield SageException.UhOhSomeoneTooCurious()
+        self.loggers_in_array()[type.Id].enabled = True
+        
+    def disable_type(self, type):
+        self.loggers_in_array()[type.Id].enabled = False
+        
+    def unlock_type_not_recommended_please_leave_it_alone_it_will_spam(self, type):
+        customization = xxCustomization(None)
+        customization.bordcol = colorama.Back.RED + colorama.Fore.WHITE
+        SageFactory.create(name="SageLoggerImportant").log("Unlocked, it isn't recommended, remember. This message cannot be turned off." + colorama.Back.RESET, type=xxPartType("IMPORTANT_HARD_CODED", 1, customization.setup_custom_border(colorama.Fore.LIGHTRED_EX + "!"), True))
+        self.loggers_in_array()[type.Id].lockedup = False
 class MildError:
     @staticmethod
     def throw(logger, name, args):
-        logger.log(f"Mild {name} - {args}, you don't need to catch it, but you may fix it ;)", type=SageLogger.Type.MILD_EXCEPTION)
+        logger.log(f"Mild {name} - {args}, you don't need to catch it, but you may fix it ;)", type=SageConsoleLogger.Type.MILD_EXCEPTION)
         
 class xxCustomization:
     bordcol = colorama.Fore.LIGHTBLACK_EX
@@ -89,7 +113,7 @@ class xxCustomization:
     def setup_custom_border(self, cos):
         return self.bordcol + self.borders[0] + colorama.Fore.RESET + cos + self.bordcol + self.borders[1] + " "
     
-class SageLogger:
+class SageConsoleLogger:
     customization : xxCustomization = None # type: ignore
     DynamicType = DynamicType()
     
@@ -111,25 +135,6 @@ class SageLogger:
                 wr.write(("-" * 16) + " " + datetime.datetime.now().strftime("%d/%m/%Y, %H:%M:%S") + " " + ("-" * 16) + "\n")
                 wr.close()
     
-    def is_enabled_type(self, type):
-        return type.enabled
-    
-    def toggle_type(self, type):
-        if (type.lockedup):
-            yield SageException.UhOhSomeoneTooCurious()
-        type.enabled = not type.enabled
-        
-    def enable_type(self, type):
-        if (type.lockedup):
-            yield SageException.UhOhSomeoneTooCurious()
-        type.enabled = True
-        
-    def disable_type(self, type):
-        type.enabled = False
-        
-    def unlock_type_not_recommended_please_leave_it_alone_it_will_spam(self, type):
-        type.lockedup = False
-    
     def log(self, message : str, type : Union[tuple[int, str, bool], xxPartType] = Type.DEFAULT.value, color = colorama.Fore.RESET, id : int = -2137, date : bool = False, time : bool = False, datecolor : str = colorama.Fore.RESET, timecolor : str = colorama.Fore.RESET, showname : bool = True, ending : str = "\n"):
         typefinish = None
         if(isinstance(type, xxPartType)):
@@ -147,7 +152,7 @@ class SageLogger:
         print(x, end=ending)
         if self.savetofile:
             with open(self.name + "." + self.logfile, "a") as wr:
-                wr.write(x + ending)
+                wr.write(x.replace("ඞ", "AMONGUS") + ending)
                 wr.close()
                 
     def ask(self, message : str, type : Union[tuple[int, str, bool], xxPartType] = Type.DEFAULT.value, color = colorama.Fore.RESET, answercolor = colorama.Fore.RESET, id : int = -2137, date : bool = False, time : bool = False, datecolor : str = colorama.Fore.RESET, timecolor : str = colorama.Fore.RESET):
@@ -163,7 +168,7 @@ class SageLogger:
         ans = input(x)
         if self.savetofile:
             with open(self.name + "." + self.logfile, "a") as wr:
-                wr.write(x + ">" + ans + "\n")
+                wr.write(x.replace("ඞ", "AMONGUS") + ">" + ans + "\n")
                 wr.close()
 
 class RemoteWhereLog(Enum):
@@ -171,7 +176,7 @@ class RemoteWhereLog(Enum):
     HEADERS = 1
     BODY = 2
 
-class SageRemoteLogger(SageLogger):
+class SageRemoteLogger(SageConsoleLogger):
     @staticmethod
     def search_for_placeholder(headers, body) -> RemoteWhereLog:
         for h in headers.keys():
@@ -209,7 +214,7 @@ class SageRemoteLogger(SageLogger):
     logfile = ""
     savetofile = ""
     def __init__(self, method, url, headers, body, name: str = "", savetofile: bool = False, logfile: str = "log"):
-        SageFactory.errorlogger.log("Initializing remote logger...", type=SageLogger.Type.SAGE_LOGGER_DEBUG)
+        SageFactory.errorlogger.log("Initializing remote logger...", type=SageConsoleLogger.Type.SAGE_LOGGER_DEBUG)
         global thislogger
         if thislogger is None:
             thislogger = self
@@ -220,7 +225,7 @@ class SageRemoteLogger(SageLogger):
         self.method = method
         self.headers = headers
         self.body = body
-        SageFactory.errorlogger.log("Searching for placeholder %LOG%", type=SageLogger.Type.SAGE_LOGGER_DEBUG)
+        SageFactory.errorlogger.log("Searching for placeholder %LOG%", type=SageConsoleLogger.Type.SAGE_LOGGER_DEBUG)
         self.remote = SageRemoteLogger.search_for_placeholder(headers, body)
         if self.remote == RemoteWhereLog.NOWHERE:
             raise SageException.NoLogPlaceholder("Remember to somewhere put %LOG%, maybe in the body?")
@@ -235,7 +240,7 @@ class SageRemoteLogger(SageLogger):
             print(message, end=ending)
         
         a = requests.request(self.method, self.url, json=SageRemoteLogger.replace_placeholder(message, RemoteWhereLog.BODY, self.remote, self.headers, self.body), headers=SageRemoteLogger.replace_placeholder(message, RemoteWhereLog.HEADERS, self.remote, self.headers, self.body))
-        SageFactory.errorlogger.log(a.text + " - " + str(a.status_code), type=SageLogger.Type.SAGE_LOGGER_DEBUG)
+        SageFactory.errorlogger.log(a.text + " - " + str(a.status_code), type=SageConsoleLogger.Type.SAGE_LOGGER_DEBUG)
         if self.savetofile:
             with open(self.name + "." + self.logfile, "a") as wr:
                 wr.write("(" + str(a.status_code) + ") " + message + ending)
