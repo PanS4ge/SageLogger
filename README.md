@@ -80,6 +80,7 @@ v1.1 - Skipped as of a fail in version naming :(
 v1.2 - Skipped as of a fail in version naming :(
 v1.3 - Logger arrays in SageFactory and getLoggerByName(name), 3 more loggers (1 secret shh). More functions of enabling, changed class name from SageLogger.Logger.SageLogger to SageLogger.Logger.SageConsoleLogger
 v1.4 - Forced release because I forgot to change sample code from README.md
+v1.5 - Fixed logger.ask() method so it returns String object (which is the users answer)
 
 # -------------------------
 # SageLogger Documentation:

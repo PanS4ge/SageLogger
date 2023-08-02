@@ -155,7 +155,7 @@ class SageConsoleLogger:
                 wr.write(x.replace("ඞ", "AMONGUS") + ending)
                 wr.close()
                 
-    def ask(self, message : str, type : Union[tuple[int, str, bool], xxPartType] = Type.DEFAULT.value, color = colorama.Fore.RESET, answercolor = colorama.Fore.RESET, id : int = -2137, date : bool = False, time : bool = False, datecolor : str = colorama.Fore.RESET, timecolor : str = colorama.Fore.RESET):
+    def ask(self, message : str, type : Union[tuple[int, str, bool], xxPartType] = Type.DEFAULT.value, color = colorama.Fore.RESET, answercolor = colorama.Fore.RESET, id : int = -2137, date : bool = False, time : bool = False, datecolor : str = colorama.Fore.RESET, timecolor : str = colorama.Fore.RESET) -> str:
         typefinish = None
         if(isinstance(type, xxPartType)):
             typefinish = (type.Id, type.customization, type.enabled)
@@ -170,6 +170,7 @@ class SageConsoleLogger:
             with open(self.name + "." + self.logfile, "a") as wr:
                 wr.write(x.replace("ඞ", "AMONGUS") + ">" + ans + "\n")
                 wr.close()
+        return ans
 
 class RemoteWhereLog(Enum):
     NOWHERE = 0

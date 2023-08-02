@@ -1,0 +1,95 @@
+---------------- 23/07/2023, 14:24:47 ----------------
+[90m[[39mtester[90m]  [39mHello World! It's DEFAULT
+[90m[[39mtester[90m]  [90m[[39m[32m+[90m] [39mHello World! It's POSITIVE
+[90m[[39mtester[90m]  [90m[[39m[33m/[90m] [39mHello World! It's ONHOLD
+[90m[[39mtester[90m]  [90m[[39m[31m-[90m] [39mHello World! It's NEGATIVE
+[90m[[39mtester[90m]  [90m[[39m[94m#[90m] [39mHello World! It's FROZEN
+[90m[[39mtester[90m]  [90m[[39m[36mi[90m] [39mHello World! It's INFORMATION
+[90m[[39mtester[90m]  [90m[[39m[91mX[90m] [39mHello World! It's MILD_EXCEPTION
+[90m[[39mtester[90m]  [90m[[39m[31mAMONGUS[90m] [39mHello World! It's AMONGUS
+[90m[[39mtester[90m]  [90m[[39m[92mS[32mL[95mD[90m] [39mHello World! It's SAGE_LOGGER_DEBUG
+[90m[[39mtester[90m]  [90m[[39mX[90m] [39mIt's dynamic!
+[32m([39mtester[32m)  [39mHello World! It's DEFAULT
+[32m([39mtester[32m)  [32m([39m[32m+[32m) [39mHello World! It's POSITIVE
+[32m([39mtester[32m)  [32m([39m[33m/[32m) [39mHello World! It's ONHOLD
+[32m([39mtester[32m)  [32m([39m[31m-[32m) [39mHello World! It's NEGATIVE
+[32m([39mtester[32m)  [32m([39m[94m#[32m) [39mHello World! It's FROZEN
+[32m([39mtester[32m)  [32m([39m[36mi[32m) [39mHello World! It's INFORMATION
+[32m([39mtester[32m)  [32m([39m[91mX[32m) [39mHello World! It's MILD_EXCEPTION
+[32m([39mtester[32m)  [32m([39m[31mAMONGUS[32m) [39mHello World! It's AMONGUS
+[32m([39mtester[32m)  [32m([39m[92mS[32mL[95mD[32m) [39mHello World! It's SAGE_LOGGER_DEBUG
+[32m([39mtester[32m)  [39mHello World! It's DEFAULT - check with above ones! There will be some missing :(
+[32m([39mtester[32m)  [32m([39m[32m+[32m) [39mHello World! It's POSITIVE - check with above ones! There will be some missing :(
+[32m([39mtester[32m)  [32m([39m[33m/[32m) [39mHello World! It's ONHOLD - check with above ones! There will be some missing :(
+[32m([39mtester[32m)  [32m([39m[36mi[32m) [39mHello World! It's INFORMATION - check with above ones! There will be some missing :(
+[32m([39mtester[32m)  [32m([39m[91mX[32m) [39mHello World! It's MILD_EXCEPTION - check with above ones! There will be some missing :(
+[32m([39mtester[32m)  [32m([39m[31mAMONGUS[32m) [39mHello World! It's AMONGUS - check with above ones! There will be some missing :(
+[32m([39mtester[32m)  [32m([39m[92mS[32mL[95mD[32m) [39mHello World! It's SAGE_LOGGER_DEBUG - check with above ones! There will be some missing :(
+[32m([39mtester[32m)  [32m([39m[36mi[32m) [39mDEFAULT maybe is True, False
+[32m([39mtester[32m)  [32m([39m[36mi[32m) [39mPOSITIVE maybe is True, False
+[32m([39mtester[32m)  [32m([39m[36mi[32m) [39mONHOLD maybe is True, False
+[32m([39mtester[32m)  [32m([39m[36mi[32m) [39mNEGATIVE maybe is False, False
+[32m([39mtester[32m)  [32m([39m[36mi[32m) [39mFROZEN maybe is False, False
+[32m([39mtester[32m)  [32m([39m[36mi[32m) [39mINFORMATION maybe is True, False
+[32m([39mtester[32m)  [32m([39m[36mi[32m) [39mMILD_EXCEPTION maybe is True, False
+[32m([39mtester[32m)  [32m([39m[36mi[32m) [39mDEBUG maybe is False, False
+[32m([39mtester[32m)  [32m([39m[36mi[32m) [39mAMONGUS maybe is True, False
+[32m([39mtester[32m)  [32m([39m[36mi[32m) [39mSAGE_LOGGER_DEBUG maybe is True, False
+[32m([39mtester[32m)  [32m([39m[93mX[32m) [39mIt's dynamic!
+[32m([39mtester[32m)  [32m([39m20[32m) [32m([39m[93mN[32m) [39mI'm ID 21
+[32m([39mtester[32m)  [32m([39m[39m23/07/2023[39m[32m) [32m([39m[93mN[32m) [39mI have time
+[32m([39mtester[32m)  [32m([39m[39m[39m14:24:47[32m) [32m([39m[93mN[32m) [39mI have date
+[32m([39mtester[32m)  [32m([39m[39m23/07/2023[39m, [39m14:24:47[32m) [32m([39m[93mN[32m) [39mI have time and date
+[32m([39mtester[32m)  [32m([39m[31m23/07/2023[39m, [33m14:24:47[32m) [32m([39m[93mN[32m) [39mI have time and date
+[32m([39m[94m#[32m) [39mPeepeepoopoo?[39m>
+[32m([39mtester[32m)  [32m([39m[92mS[32mL[95mD[32m) [39mCreating remote logs
+[32m([39mtester[32m)  [32m([39m[92mS[32mL[95mD[32m) [39mRemoving remote logs
+[32m([39mtester[32m)  [32m([39m[36mi[32m) [39mSent to discord
+---------------- 23/07/2023, 14:26:38 ----------------
+[90m[[39mtester[90m]  [90m[[39m[31mAMONGUS[90m] [39mHello World! Found tester again!
+[90m[[39mtester[90m]  [39mHello World! It's DEFAULT
+[90m[[39mtester[90m]  [90m[[39m[32m+[90m] [39mHello World! It's POSITIVE
+[90m[[39mtester[90m]  [90m[[39m[33m/[90m] [39mHello World! It's ONHOLD
+[90m[[39mtester[90m]  [90m[[39m[31m-[90m] [39mHello World! It's NEGATIVE
+[90m[[39mtester[90m]  [90m[[39m[94m#[90m] [39mHello World! It's FROZEN
+[90m[[39mtester[90m]  [90m[[39m[36mi[90m] [39mHello World! It's INFORMATION
+[90m[[39mtester[90m]  [90m[[39m[91mX[90m] [39mHello World! It's MILD_EXCEPTION
+[90m[[39mtester[90m]  [90m[[39m[31mAMONGUS[90m] [39mHello World! It's AMONGUS
+[90m[[39mtester[90m]  [90m[[39m[92mS[32mL[95mD[90m] [39mHello World! It's SAGE_LOGGER_DEBUG
+[90m[[39mtester[90m]  [90m[[39mX[90m] [39mIt's dynamic!
+[32m([39mtester[32m)  [39mHello World! It's DEFAULT
+[32m([39mtester[32m)  [32m([39m[32m+[32m) [39mHello World! It's POSITIVE
+[32m([39mtester[32m)  [32m([39m[33m/[32m) [39mHello World! It's ONHOLD
+[32m([39mtester[32m)  [32m([39m[31m-[32m) [39mHello World! It's NEGATIVE
+[32m([39mtester[32m)  [32m([39m[94m#[32m) [39mHello World! It's FROZEN
+[32m([39mtester[32m)  [32m([39m[36mi[32m) [39mHello World! It's INFORMATION
+[32m([39mtester[32m)  [32m([39m[91mX[32m) [39mHello World! It's MILD_EXCEPTION
+[32m([39mtester[32m)  [32m([39m[31mAMONGUS[32m) [39mHello World! It's AMONGUS
+[32m([39mtester[32m)  [32m([39m[92mS[32mL[95mD[32m) [39mHello World! It's SAGE_LOGGER_DEBUG
+[32m([39mtester[32m)  [39mHello World! It's DEFAULT - check with above ones! There will be some missing :(
+[32m([39mtester[32m)  [32m([39m[32m+[32m) [39mHello World! It's POSITIVE - check with above ones! There will be some missing :(
+[32m([39mtester[32m)  [32m([39m[33m/[32m) [39mHello World! It's ONHOLD - check with above ones! There will be some missing :(
+[32m([39mtester[32m)  [32m([39m[36mi[32m) [39mHello World! It's INFORMATION - check with above ones! There will be some missing :(
+[32m([39mtester[32m)  [32m([39m[91mX[32m) [39mHello World! It's MILD_EXCEPTION - check with above ones! There will be some missing :(
+[32m([39mtester[32m)  [32m([39m[31mAMONGUS[32m) [39mHello World! It's AMONGUS - check with above ones! There will be some missing :(
+[32m([39mtester[32m)  [32m([39m[92mS[32mL[95mD[32m) [39mHello World! It's SAGE_LOGGER_DEBUG - check with above ones! There will be some missing :(
+[32m([39mtester[32m)  [32m([39m[36mi[32m) [39mDEFAULT maybe is True, False
+[32m([39mtester[32m)  [32m([39m[36mi[32m) [39mPOSITIVE maybe is True, False
+[32m([39mtester[32m)  [32m([39m[36mi[32m) [39mONHOLD maybe is True, False
+[32m([39mtester[32m)  [32m([39m[36mi[32m) [39mNEGATIVE maybe is False, False
+[32m([39mtester[32m)  [32m([39m[36mi[32m) [39mFROZEN maybe is False, False
+[32m([39mtester[32m)  [32m([39m[36mi[32m) [39mINFORMATION maybe is True, False
+[32m([39mtester[32m)  [32m([39m[36mi[32m) [39mMILD_EXCEPTION maybe is True, False
+[32m([39mtester[32m)  [32m([39m[36mi[32m) [39mDEBUG maybe is False, False
+[32m([39mtester[32m)  [32m([39m[36mi[32m) [39mAMONGUS maybe is True, False
+[32m([39mtester[32m)  [32m([39m[36mi[32m) [39mSAGE_LOGGER_DEBUG maybe is True, False
+[32m([39mtester[32m)  [32m([39m[93mX[32m) [39mIt's dynamic!
+[32m([39mtester[32m)  [32m([39m20[32m) [32m([39m[93mN[32m) [39mI'm ID 21
+[32m([39mtester[32m)  [32m([39m[39m23/07/2023[39m[32m) [32m([39m[93mN[32m) [39mI have time
+[32m([39mtester[32m)  [32m([39m[39m[39m14:26:38[32m) [32m([39m[93mN[32m) [39mI have date
+[32m([39mtester[32m)  [32m([39m[39m23/07/2023[39m, [39m14:26:38[32m) [32m([39m[93mN[32m) [39mI have time and date
+[32m([39mtester[32m)  [32m([39m[31m23/07/2023[39m, [33m14:26:38[32m) [32m([39m[93mN[32m) [39mI have time and date
+[32m([39m[94m#[32m) [39mPeepeepoopoo? > [39m>a
+[32m([39mtester[32m)  [32m([39m[92mS[32mL[95mD[32m) [39mCreating remote logs
+[32m([39mtester[32m)  [32m([39m[92mS[32mL[95mD[32m) [39mRemoving remote logs
+[32m([39mtester[32m)  [32m([39m[36mi[32m) [39mSent to discord
